@@ -1,0 +1,16 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        def nextpermute(temp: List[int],residue: List[int])->None:
+            if not residue:
+                result.append(temp)
+                return
+
+            for i in range(len(residue)):
+                if i == 0 or residue[i] != residue[i-1]:
+                    nextpermute(temp+[residue[i]],residue[0:i]+residue[i+1:])
+        
+        temp = []
+        nums.sort()
+        nextpermute(temp,nums)
+        return result
