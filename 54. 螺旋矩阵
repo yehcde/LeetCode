@@ -1,0 +1,18 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        ans = []
+        while matrix:
+            try:
+                for j in matrix[0]:
+                    ans.append(j)
+                matrix = matrix[1:]
+                for j in range(len(matrix)):
+                    ans.append(matrix[j].pop(-1))
+                for j in range(len(matrix[-1])-1, -1, -1):
+                    ans.append(matrix[-1][j])
+                matrix = matrix[:len(matrix)-1]
+                for j in range(len(matrix)-1, -1, -1):
+                    ans.append(matrix[j].pop(0))
+            except:
+                break
+        return ans
