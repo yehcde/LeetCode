@@ -1,0 +1,45 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def rotateRight(self, head: ListNode, k: int) -> ListNode:
+        """
+        旋转链表\n
+        :param head: 链表的头
+        :param k: 旋转刻度
+        :return: 旋转后链表的头
+        """
+        if head is None:
+            return None
+        length = self.get_length(head)
+        k = k % length
+        step = length - k
+        result = head
+        node = head
+        temp = None
+        for i in range(0, length):
+            if i == step - 1:
+                temp = node
+            if i == step:
+                result = node
+            if i == length - 1:
+                node.next = head
+            node = node.next
+        temp.next = None
+        return result
+
+    def get_length(self, head: ListNode) -> int:
+        """
+        获取单链表的长度\n
+        :param head: 链表的头
+        :return: 链表的长度
+        """
+        node = head
+        result = 0
+        while True:
+            if node is None:
+                return result
+            result = result + 1
+            node = node.next
